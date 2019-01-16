@@ -66,7 +66,9 @@ function! NERDTreeGitStatusRefreshListener(event)
     let l:flag = g:NERDTreeGetGitStatusPrefix(l:path)
     call l:path.flagSet.clearFlags('git')
     if l:flag !=# ''
-        call l:path.flagSet.addFlag('git', l:flag)
+        call l:path.flagSet.addFlag('git', l:flag.' ')
+    else
+        call l:path.flagSet.addFlag('git', '  ')
     endif
 endfunction
 
@@ -336,6 +338,9 @@ function! s:AddHighlighting()
     for l:name in keys(l:synmap)
         exec 'syn match ' . l:name . ' #' . escape(l:synmap[l:name], '~') . '# containedin=NERDTreeFlags contained'
     endfor
+
+    exec 'syn match NERDTreeFlagBraces /\[/ containedin=NERDTreeFlags contained conceal'
+    exec 'syn match NERDTreeFlagBraces /\]/ containedin=NERDTreeFlags contained conceal'
 
     hi def link NERDTreeGitStatusModified Special
     hi def link NERDTreeGitStatusStaged Function
