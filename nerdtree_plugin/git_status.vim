@@ -339,8 +339,8 @@ function! s:AddHighlighting()
         exec 'syn match ' . l:name . ' #' . escape(l:synmap[l:name], '~') . '# containedin=NERDTreeFlags contained'
     endfor
 
-    exec 'syn match NERDTreeFlagBraces /\[/ containedin=NERDTreeFlags contained conceal'
-    exec 'syn match NERDTreeFlagBraces /\]/ containedin=NERDTreeFlags contained conceal'
+    syn match NERDTreeFlagBraces /\[/ containedin=NERDTreeFlags,NERDTreeLinkFile,NERDTreeLinkDir contained conceal
+    syn match NERDTreeFlagBraces /\]/ containedin=NERDTreeFlags,NERDTreeLinkFile,NERDTreeLinkDir contained conceal
 
     hi def link NERDTreeGitStatusModified Special
     hi def link NERDTreeGitStatusStaged Function
